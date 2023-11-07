@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE grammar PUBLIC "-//W3C//DTD GRAMMAR 1.0//EN" "grammar.dtd">
+<!-- the default grammar language is FR  -->
+<grammar
+	version="1.0"
+	mode="voice"
+	xmlns="http://www.w3.org/2001/06/grammar"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3.org/2001/06/grammar
+                              grammar.xsd"
+	xml:lang="fr-FR"
+	root="ACTION_SHAPE"
+	tag-format="semantics/1.0"
+>
+	<rule id="ACTION_SHAPE" scope="public">
+		<ruleref uri="#ACTION_" />
+		<!-- <item repeat="0-1"><ruleref uri="#ARTICLE_" /></item> -->
+		<ruleref uri="#SHAPE_" />
+		<item repeat="0-1"> <ruleref uri="#COLOR_" /></item>
+		<!-- <ruleref uri="#LOCATION_" /> -->
+
+		<!-- <item>
+				<ruleref uri="#ACTION_" />
+				<ruleref uri="#LOCATION_" />
+				<ruleref uri="#ARTICLE_" />
+				<ruleref uri="#SHAPE_" />
+				<item repeat="0-1"> <ruleref uri="#COLOR_" /></item>
+			</item> -->
+
+		<tag> out.text = rules.ACTION_.action + rules.SHAPE_.shape + rules.LOCATION_.location </tag>
+	</rule>
+
+	<rule id="ACTION_">
+		<tag> out.action = "none" </tag>
+		<one-of>
+			<item> créer <tag> out.action="create";</tag> </item>
+			<item> tracer <tag> out.action="create";</tag> </item>
+			<item> déssiner <tag> out.action="create";</tag></item>
+			<item> déplacer <tag> out.action="deplace";</tag></item>
+		</one-of>
+		<tag> out.text = meta.current().text + " " </tag>
+	</rule>
+
+	<rule id="ARTICLE_">
+		<one-of>
+			<item> le </item>
+			<item> ce </item>
+			<item> un </item>
+		</one-of>
+		<tag> out.text = meta.current().text + " " </tag>
+	</rule>
+
+	<rule id="SHAPE_">
+		<tag> out.shape = "none" </tag>
+		<one-of>
+			<!-- <item> ca <tag> out.shape= "pending";</tag> </item>
+			<item> ceci <tag> out.shape= "pending";</tag> </item> -->
+			<item> rectangle <tag> out.shape= "rectangle";</tag> </item>
+			<item> cercle <tag> out.shape= "cercle";</tag> </item>
+			<item> triangle <tag> out.shape="triangle";</tag> </item>
+			<item> losange <tag> out.shape= "losange";</tag> </item>
+		</one-of>
+		<tag> out.text = meta.current().text + " " </tag>
+	</rule>
+
+	<!-- 	<rule id="LOCATION_">
+		<tag> out.location = "none" </tag>
+		<one-of>
+			<item> ici <tag> out.location="pending";</tag> </item>
+			<item> la <tag> out.location="pending";</tag></item>
+		</one-of>
+		<tag> out.text = meta.current().text + " " </tag>
+	</rule> -->
+
+	<rule id="COLOR_">
+		<tag> out.color = "none" </tag>
+		<one-of>
+			<item> rouge <tag> out.color="rouge";</tag> </item>
+			<item> vert <tag> out.color="vert";</tag> </item>
+			<item> bleu <tag> out.color="bleu";</tag> </item>
+		</one-of>
+		<tag> out.text = meta.current().text + " " </tag>
+	</rule>
+</grammar>
