@@ -18,10 +18,12 @@ Data data_en_cours = new Data();
 Ivy bus;
 
 void setup() {
+  int WIDTH = 800;
+  int HEIGHT = 600;
   size(800, 600);
   surface.setResizable(true);
   surface.setTitle("Palette multimodale");
-  surface.setLocation(20, 20);
+  surface.setLocation(displayWidth/2 - WIDTH/2, displayHeight/2- HEIGHT/2);
   sketch_icon = loadImage("Palette.jpg");
   surface.setIcon(sketch_icon);
 
@@ -69,11 +71,11 @@ void setup() {
         System.out.println("Received parole");
 
         data_en_cours.setAction(act);
-        data_en_cours.setColor(color_string); // if empty will set to null
-        data_en_cours.setShape(shape_string); // if empty will set to null
+        data_en_cours.setColor(color_string); // if empty will be set to null
+        data_en_cours.setShape(shape_string); // if empty will be set to null
 
-        System.out.println(data_en_cours);
-        if (data_en_cours.action == "DELETE") {
+        System.out.println(data_en_cours);        
+        if (data_en_cours.action.equals("DELETE")) {
           mae = FSM.REALISATION_ACTION;
         } else if (data_en_cours.isDataCompleted()) {
           mae = FSM.REALISATION_ACTION;
@@ -84,20 +86,21 @@ void setup() {
     }
     );
 
-      // reset state
-      //bus.bindMsg("^sra5 Event=Speech_Rejected", new IvyMessageListener()
-      //{
-      //  public void receive(IvyClient client, String[] args)
-      //  {
-      //    System.out.println("Received reset");
-      //    data_en_cours.reset();
-      //    System.out.println(data_en_cours);
-      //    mae=FSM.IDLE;
-      //  }
-      //}
-      //);
-    }
-    catch (IvyException ie) {}
+    // reset state
+    //bus.bindMsg("^sra5 Event=Speech_Rejected", new IvyMessageListener()
+    //{
+    //  public void receive(IvyClient client, String[] args)
+    //  {
+    //    System.out.println("Received reset");
+    //    data_en_cours.reset();
+    //    System.out.println(data_en_cours);
+    //    mae=FSM.IDLE;
+    //  }
+    //}
+    //);
+  }
+  catch (IvyException ie) {
+  }
 }
 
 void draw() {
@@ -118,6 +121,7 @@ void draw() {
     break;
 
   case REALISATION_ACTION:
+    println("REALISATION_ACTION");
     switch(data_en_cours.action) {
     case "CREATE":
       formes.add(data_en_cours.getForme());
