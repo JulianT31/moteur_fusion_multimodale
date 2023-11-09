@@ -12,7 +12,6 @@ ArrayList<Forme> formes; // liste de formes stockées
 FSM mae; // Finite Sate Machine
 int indice_forme;
 PImage sketch_icon;
-
 Data data_en_cours = new Data();
 
 Ivy bus;
@@ -49,7 +48,10 @@ void setup() {
           data_en_cours.setShape(shape_string);
 
           System.out.println(data_en_cours);
-          if (data_en_cours.isDataCompleted()) {
+
+          if (data_en_cours.action.equals("DELETE") && data_en_cours.shape != null) {
+            mae = FSM.REALISATION_ACTION;
+          } else if (data_en_cours.isDataCompleted()) {
             mae=FSM.REALISATION_ACTION;
           } else {
             mae=FSM.EN_ATTENTE_INFORMATIONS;
@@ -74,8 +76,8 @@ void setup() {
         data_en_cours.setColor(color_string); // if empty will be set to null
         data_en_cours.setShape(shape_string); // if empty will be set to null
 
-        System.out.println(data_en_cours);        
-        if (data_en_cours.action.equals("DELETE")) {
+        System.out.println(data_en_cours);
+        if (data_en_cours.action.equals("DELETE") && data_en_cours.shape != null) {
           mae = FSM.REALISATION_ACTION;
         } else if (data_en_cours.isDataCompleted()) {
           mae = FSM.REALISATION_ACTION;
@@ -110,9 +112,10 @@ void draw() {
   case INITIAL:  // Etat INITIAL
     background(255);
     fill(0);
-    text("Projet fusion multimodale", 50, 50);
+    text("Projet fusion multimodale UPSSITECH", 50, 50);
     text("Julian TRANI & Pauline JOBERT 3A", 50, 80);
-    text("r : reset la trame de données", 50, 110);
+    text("Bienvenue sur le moteur de fusion (Palette)", 50, 110);
+    text("r : reset la trame de données", 50, 140);
     break;
 
   case IDLE:
@@ -161,6 +164,14 @@ void draw() {
 // fonction d'affichage des formes m
 void affiche() {
   background(255);
+  fill(0);
+  text("r : reset la trame de données", 10, 20);
+
+  if (data_en_cours.location != null) {
+    fill(0);
+    circle((int) data_en_cours.location.getX(), (int) data_en_cours.location.getY(), 5);
+  }
+
   /* afficher tous les objets */
   for (int i=0; i<formes.size(); i++) // on affiche les objets de la liste
     (formes.get(i)).update();
