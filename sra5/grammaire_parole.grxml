@@ -19,7 +19,7 @@
 			<item> <ruleref uri="#pointage" /> <tag> out.forme = rules.pointage </tag></item>
 		</one-of>
 		<item> <ruleref uri="#couleur" /> <tag> out.couleur = rules.couleur </tag></item>
-		<item> <ruleref uri="#localisation" /> <tag> out.localisation = rules.localisation </tag> </item>
+		<item repeat="0-1"> <ruleref uri="#localisation" /> <tag> out.localisation = rules.localisation </tag> </item>
 
 		<tag>
 			out = "action=" + out.action + " where=" + out.pointage + " form=" + out.forme + " color=" + out.couleur + " localisation=" +
