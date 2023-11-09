@@ -1,6 +1,6 @@
 # Moteur fusion Multimodale
 
-Projet IHM Multimodale 3A SRI 2023
+Projet IHM Multimodale 3A SRI UPSSITECH
 
 Autheurs : Julian TRANI & Pauline JOBERT
 
