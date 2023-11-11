@@ -39,10 +39,6 @@
 
 			<item> déplacer <tag> out = "MOVE" </tag></item>
 			<item> bouger <tag> out = "MOVE" </tag></item>
-
-			<!-- <item> quitter <tag> out = "QUIT" </tag></item>
-			<item> sortir <tag> out = "QUIT" </tag></item>
-			<item> arrêter <tag> out = "QUIT" </tag></item> -->
 		</one-of>
 	</rule>
 
@@ -57,7 +53,13 @@
 	<rule id="forme">
 		<tag> out = "none" </tag>
 		<ruleref special="GARBAGE" />
-		<item repeat="0-1">un</item>
+		<item repeat="0-1">
+			<one-of>
+				<item> un</item>
+				<item> le</item>
+				<item> ce </item>
+			</one-of>
+		</item>
 		<one-of>
 			<item> triangle <tag> out = "TRIANGLE" </tag></item>
 			<item> losange <tag> out = "DIAMOND" </tag></item>
@@ -68,7 +70,6 @@
 
 	<rule id="couleur">
 		<tag> out = "none" </tag>
-		<ruleref special="GARBAGE" />
 		<item repeat="0-1">en</item>
 		<one-of>
 			<item> rouge <tag> out = "RED" </tag></item>
